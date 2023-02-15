@@ -38,6 +38,24 @@ Notes:
 - `ouput_path`: the segmentation results will be saved in this path.
 
 
+## Train the model based on your own data
+Organize the dataset as follows
+
+```
+Task001_MousePETCT
+    - imagesTr
+        - case1_0000.nii.gz # CT
+        - case1_0001.nii.gz # PET
+    - imagesTs
+    - labelsTr
+        - case1.nii.gz # ground truth
+    - dataset.json
+```
+Run
+
+```bash
+nnUNet_train 3d_fullres nnUNetTrainerV2 Task001_MousePETCT 0 
+```
 
 
 
