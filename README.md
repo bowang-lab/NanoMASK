@@ -42,4 +42,8 @@ Notes:
 
 
 ## Acknowledgement
+<<<<<<< HEAD
 This customized model is based on the [nnUNet](https://github.com/MIC-DKFZ/nnUNet) framework. Thanks for the nnUNet team very much!
+=======
+This customized model is based on the [nnUNet](https://github.com/MIC-DKFZ/nnUNet) framework. Thanks for the nnUNet team very much!
+>>>>>>> 92e2501aee23dcbeb7b0b46863222fbeb8927759
