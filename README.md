@@ -24,6 +24,16 @@ cd NanoMask
 pip install -e .
 ```
 
+## Preprocessing your mouse PET/CT data
+Run
+
+```bash
+python dcm2nii.py -i input_path -o output_path -a CT
+```
+
+- `input_path`: the input root path containing all experiments. Inside each experiment folder, there are three folders: 'CT' for CT data, 'PET' for PET data, and 'ROI' for organ contours.
+- `CT`: this can only be CT or PET, representing to convert organ contours according to CT data or PET data.
+
 
 ## Segment organs for new mouse PET/CT data
 
@@ -57,6 +67,28 @@ Run
 nnUNet_train 3d_fullres nnUNetTrainerV2 Task001_MousePETCT 0 
 ```
 
+## Evaluate your segmentation result
+Run
+
+```bash
+python compute_metrics.py -s segmentation_path -r ground_truth_path -o output_path -n Heart Lungs Liver Spleen Kidneys Tumor
+```
+
+Notes:
+- `Heart Lungs Liver Spleen Kidneys Tumor`: the organs in ascending order according to their mapped integers.
+- `ouput_path`: the evaluation results, DSC and VD, will be saved in this path in a csv file.
+
+
+## Evaluate your segmentation result
+Run
+
+```bash
+python compute_metrics.py -s segmentation_path -r ground_truth_path -o output_path -n Heart Lungs Liver Spleen Kidneys Tumor
+```
+
+Notes:
+- `n`: the mapped integers of each organ in ascending order
+- `ouput_path`: the evaluation results, DSC and VD, will be saved in this path in a csv file.
 
 
 ## Acknowledgement
