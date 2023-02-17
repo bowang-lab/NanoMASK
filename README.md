@@ -35,9 +35,9 @@ python dcm2nii.py -i input_path -o output_path -a CT
 - `CT`: this can only be CT or PET, representing to convert organ contours according to CT data or PET data.
 
 
-## Segment organs for new mouse PET/CT data
+## Organ segmentation for mouse PET/CT data
 
-Download the [pretrained model] and put it into `./NanoMask/nnunet/nnUNet_data/nnUNet/3d_fullres`. Run
+Download the [pretrained model](https://drive.google.com/drive/folders/17ymOMF_t4P7gwMBikWnsuq_fiLZ9xn2w?usp=share_link) and put it into `./NanoMask/nnunet/nnUNet_data/nnUNet/3d_fullres`. Run
 
 ```bash
 nnUNet_predict -i input_path -o output_path -m 3d_fullres -t 006 -f 0
