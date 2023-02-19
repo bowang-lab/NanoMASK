@@ -2,6 +2,7 @@ import os
 import numpy as np
 import shutil
 join = os.path.join
+import argparse
 
 parser = argparse.ArgumentParser(description='Program to use affine registration to register CT and PET data')
 parser.add_argument('-i', '--input', help='The input path contains PET/CT data and organ contours', required=True)
