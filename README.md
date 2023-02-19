@@ -25,14 +25,29 @@ pip install -e .
 ```
 
 ## Preprocessing your mouse PET/CT data
-Run
+1. Convert PET/CT data format
 
-```bash
-python dcm2nii.py -i input_path -o output_path -a CT
-```
+    Run
 
-- `input_path`: the input root path containing all experiments. Inside each experiment folder, there are three folders: 'CT' for CT data, 'PET' for PET data, and 'ROI' for organ contours.
-- `CT`: this can only be CT or PET, representing to convert organ contours according to CT data or PET data.
+    ```bash
+    python dcm2nii.py -i input_path -o output_path -a CT
+    ```
+
+    - `input_path`: the input path contains three folders: 'CT' for CT data, 'PET' for PET data, and 'ROI' for organ contours.
+    - `CT`: this can only be CT or PET, which represents converting organ contours according to CT data or PET data.
+
+2. Register PET/CT data
+
+    Install Greedy for image registration from https://greedy.readthedocs.io/en/latest/install.html.
+
+    Use affine registration to register PET/CT data
+
+    ```bash
+    python affine_registration.py -i input_path -m CT
+    ```
+
+    - `input_path`: the input path contains PET, CT data and organ contours. All in '.nii.gz' format.
+    - `CT`: this can only be CT or PET. 'CT' represents using CT data ('CT_0000.nii.gz') as the moving image and PET data ('PET_0001.nii.gz') as the fixed image. Apply Affine transformation to register CT and organ contours ('organs-CT.nii.gz') to PET. 'PET' represent using PET data as the moving image and CT data as the fixed image. 
 
 
 ## Organ segmentation for mouse PET/CT data
