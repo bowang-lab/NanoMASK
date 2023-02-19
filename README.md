@@ -83,28 +83,28 @@ nnUNet_train 3d_fullres nnUNetTrainerV2 Task001_MousePETCT 0
 ```
 
 ## Evaluate your segmentation result
-Run
+1. Compute Dice Similarity Coefficient and Volume Difference
 
-```bash
-python compute_metrics.py -s segmentation_path -r ground_truth_path -o output_path -n Heart Lungs Liver Spleen Kidneys Tumor
-```
+    ```bash
+    python compute_metrics.py -s segmentation_path -r ground_truth_path -o output_path -n Heart Lungs Liver Spleen Kidneys Tumor
+    ```
 
-Notes:
-- `Heart Lungs Liver Spleen Kidneys Tumor`: the organs in ascending order according to their mapped integers.
-- `ouput_path`: the evaluation results, DSC and VD, will be saved in this path in a csv file.
+    Notes:
+    - `Heart Lungs Liver Spleen Kidneys Tumor`: the mapped integers of each organ in ascending order
+    - `ouput_path`: the evaluation results, DSC and VD, will be saved in this path in a csv file.
 
+2. Compute clinical metrics based on three groups metrics data: machine, ground truth contours, and segmentation contours
 
-## Evaluate your segmentation result
-Run
+    This includes mean voxel intensity, total region volume, total/max/min/std intensity in the contour, percent injected dose per cubic centimeter
 
-```bash
-python compute_metrics.py -s segmentation_path -r ground_truth_path -o output_path -n Heart Lungs Liver Spleen Kidneys Tumor
-```
+    ```bash
+    python compute_clinical.py -s segmentation_path -r ground_truth_path -i image_path -o output_path -m machine_path -n Heart Lungs Liver Spleen Kidneys Tumor
+    ```
 
-Notes:
-- `n`: the mapped integers of each organ in ascending order
-- `ouput_path`: the evaluation results, DSC and VD, will be saved in this path in a csv file.
-
+    Notes:
+    - `machine_path`: the path of xlsx file containing machine metrics including time of scan start, time of injection (datatime) and injected dose (mCi), machine percent injected dose per cubic centimeter (%ID/cc) for each timepoint.
+    - `Heart Lungs Liver Spleen Kidneys Tumor`: the organs in ascending order according to their mapped integers.
+    - `ouput_path`: the clinical metrics will be saved in this path in an xlsx file.
 
 ## Acknowledgement
 This customized model is based on the [nnUNet](https://github.com/MIC-DKFZ/nnUNet) framework. Thanks for the nnUNet team very much!
