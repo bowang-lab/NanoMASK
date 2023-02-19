@@ -8,7 +8,7 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description='Program to convert DICOM into NIfTI')
-parser.add_argument('-i', '--input', help='The input root path contains all experiments', required=True)
+parser.add_argument('-i', '--input', help='The input path containing PET/CT data and organ contours', required=True)
 parser.add_argument('-o', '--output', help='The output path', required=True)
 parser.add_argument('-a', '--annotations', help='Convert the organ contours according to CT or PET image. Value can only be CT or PET', required=True)
 args = parser.parse_args()
@@ -78,17 +78,12 @@ def convert_img(img_dcms_path, contour_path, save_path, img_type):
 
 os.makedirs(save_root_path, exist_ok=True)
 remove_DS_Store(root_path)
-hpis = sorted(os.listdir(root_path))
-for hpi in hpis:
-    hpi_path = join(root_path, hpi)
-    remove_DS_Store(hpi_path)
-    for inj in sorted(os.listdir(hpi_path)):
-        contours_path = join(hpi_path, inj, 'ROI')
-        remove_DS_Store(contours_path)
-        ct_path = join(hpi_path, inj, 'CT')
-        remove_DS_Store(ct_path)
-        pet_path = join(hpi_path, inj, 'PET')
-        remove_DS_Store(pet_path)
-        convert_img(ct_path, contours_path, join(save_root_path, hpi, inj), 'CT')
-        convert_img(pet_path, contours_path, join(save_root_path, hpi, inj), 'PET')
-        
+
+contours_path = join(root_path, 'ROI')
+remove_DS_Store(contours_path)
+ct_path = join(root_path, 'CT')
+remove_DS_Store(ct_path)
+pet_path = join(root_path,'PET')
+remove_DS_Store(pet_path)
+convert_img(ct_path, contours_path, save_root_path, 'CT')
+convert_img(pet_path, contours_path, save_root_path, 'PET')
